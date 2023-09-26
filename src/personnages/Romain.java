@@ -33,4 +33,11 @@ public class Romain {
 			parler("J'abandonne...");
 		}
 	}
+	
+	public static void main(String[] args) {
+		Romain unRomain = new Romain("UnRomain", 5);
+		System.out.println(unRomain.prendreParole(unRomain.getNom()));
+		unRomain.parler("les gaulois !");
+		unRomain.recevoirCoup(8);
+	}
 }
