@@ -37,11 +37,9 @@ public class Gaulois {
 
 	public String toString() {
 		return "Gaulois [nom=" + getNom() + ", force=" + getForce() + ", effetPotion=" + getEffetPotion() + "]";
-		System.out.println(asterix);
 	}
 
 	public static void main(String[] args) {
 		Gaulois asterix = new Gaulois("Astérix", 8);
-		toString();
 	}
 }
