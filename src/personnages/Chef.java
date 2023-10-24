@@ -11,6 +11,7 @@ public class Chef {
         this.nom = nom;
         this.force = force;
         this.village = village;
+        village.setChef(this);
     }
     
     public String getNom() {

@@ -5,10 +5,11 @@ public class Romain {
 	private int force;
 	private Equipement[] equipements = new Equipement[2];
 	private int nbEquipement = 0;
-	private String texte;
 
 	public Romain(String nom, int force) {
-		assert (force > 0);
+		if (force <= 0) {
+			throw new IllegalArgumentException("Invalid force: " + force);
+		}
 		this.nom = nom;
 		this.force = force;
 	}
@@ -28,60 +29,40 @@ public class Romain {
 	private String prendreParole(String nom) {
 		return "Le romain " + nom + " : ";
 	}
-
-//	public void recevoirCoup(int forceCoup) {
-//		assert (this.force > 0);
-//		int forceAvantCoup = this.force;
-//		force -= forceCoup;
-//		if (force > 0) {
-//			parler("Aie");
-//		} else {
-//			parler("J'abandonne...");
-//		}
-//		assert (forceAvantCoup > this.force);
-//	}
 	
 	public Equipement[] recevoirCoup(int forceCoup) {
 		Equipement[] equipementEjecte = null;
 		// précondition
 		assert force > 0;
 		int oldForce = force;
-		forceCoup = CalculResistanceEquipement(forceCoup);
+		forceCoup = calculResistanceEquipement(forceCoup);
 		force -= forceCoup;
-// 		if (force > 0) {
-// 			parler("Aïe");
-// 		} else {
-// 			equipementEjecte = ejecterEquipement();
-// 			parler("J'abandonne...");
-// 		}
-		switch (force) {
-		case 0:
+		if (force == 0) {
 			parler("Aïe");
-		default:
+		}
+		else {
 			equipementEjecte = ejecterEquipement();
 			parler("J'abandonne...");
-			break;
 		}
 // 		post condition la force a diminuée
 		assert force < oldForce;
 		return equipementEjecte;
 	}
 	
-	private int CalculResistanceEquipement(int forceCoup) {
-		texte = "Ma force est de " + this.force + ", et la force du coup est de " + forceCoup;
+	private int calculResistanceEquipement(int forceCoup) {
+		String texte = "Ma force est de " + this.force + ", et la force du coup est de " + forceCoup;
 		int resistanceEquipement = 0;
-		if (!(nbEquipement == 0)) {
+		if (nbEquipement != 0) {
 			texte += "\nMais heureusement, grace à mon équipement sa force est diminué de ";
-			for (int i = 0; i < nbEquipement;) {
-					if ((equipements[i] != null && equipements[i].equals(Equipement.BOUCLIER)) == true) {
+			for (int i = 0; i < nbEquipement;i++) {
+					if (equipements[i] != null && equipements[i].equals(Equipement.BOUCLIER)) {
 						resistanceEquipement += 8;
 					} else {
 						System.out.println("Equipement casque");
 						resistanceEquipement += 5;
 					}
-					i++;
 			}
-			texte =+ resistanceEquipement + "!";
+			texte += resistanceEquipement + "!";
 		}
 		parler(texte);
 		forceCoup -= resistanceEquipement;
@@ -106,13 +87,14 @@ public class Romain {
 	}
 	
 	public void sEquiper(Equipement equipement) {
+		String sentenceBegining = "Le soldat " + nom;
 		switch (nbEquipement) {
 		case 2:
-			System.out.println("Le soldat " + nom + " est déjà bien protégé(e) !");
+			System.out.println(sentenceBegining + " est déjà bien protégé(e) !");
 			break;
 		case 1:
 			if (equipements[0] == equipement) {
-				System.out.println("Le soldat " + nom + " possède déjà un " + equipement);
+				System.out.println(sentenceBegining + " possède déjà un " + equipement);
 			} else {
 				this.equiper(equipement);
 			}
