@@ -32,19 +32,19 @@ public class Romain {
 	
 	public Equipement[] recevoirCoup(int forceCoup) {
 		Equipement[] equipementEjecte = null;
-		// précondition
+		// precondition
 		assert force > 0;
 		int oldForce = force;
 		forceCoup = calculResistanceEquipement(forceCoup);
 		force -= forceCoup;
 		if (force == 0) {
-			parler("Aïe");
+			parler("Aie");
 		}
 		else {
 			equipementEjecte = ejecterEquipement();
 			parler("J'abandonne...");
 		}
-// 		post condition la force a diminuée
+// 		post condition la force a diminuÃ©e
 		assert force < oldForce;
 		return equipementEjecte;
 	}
@@ -53,7 +53,7 @@ public class Romain {
 		String texte = "Ma force est de " + this.force + ", et la force du coup est de " + forceCoup;
 		int resistanceEquipement = 0;
 		if (nbEquipement != 0) {
-			texte += "\nMais heureusement, grace à mon équipement sa force est diminué de ";
+			texte += "\nMais heureusement, grace a mon equipement sa force est diminue de ";
 			for (int i = 0; i < nbEquipement;i++) {
 					if (equipements[i] != null && equipements[i].equals(Equipement.BOUCLIER)) {
 						resistanceEquipement += 8;
@@ -71,7 +71,7 @@ public class Romain {
 	
 	private Equipement[] ejecterEquipement() {
 		Equipement[] equipementEjecte = new Equipement[nbEquipement];
-		System.out.println("L'équipement de " + nom.toString() + "s'envole sous la force du coup.");
+		System.out.println("L'equipement de " + nom.toString() + "s'envole sous la force du coup.");
 		//TODO
 		int nbEquipementEjecte = 0;
 		for (int i = 0; i < nbEquipement; i++) {
@@ -90,11 +90,11 @@ public class Romain {
 		String sentenceBegining = "Le soldat " + nom;
 		switch (nbEquipement) {
 		case 2:
-			System.out.println(sentenceBegining + " est déjà bien protégé(e) !");
+			System.out.println(sentenceBegining + " est deja bien protege(e) !");
 			break;
 		case 1:
 			if (equipements[0] == equipement) {
-				System.out.println(sentenceBegining + " possède déjà un " + equipement);
+				System.out.println(sentenceBegining + " possede deja un " + equipement);
 			} else {
 				this.equiper(equipement);
 			}
@@ -106,7 +106,7 @@ public class Romain {
 
 	private void equiper(Equipement equipement) {
 		equipements[nbEquipement] = equipement;
-		System.out.println("Le soldat " + nom + " s'équipe d'un " + equipement);
+		System.out.println("Le soldat " + nom + " s'ï¿½quipe d'un " + equipement);
 		nbEquipement++;
 	}
 
